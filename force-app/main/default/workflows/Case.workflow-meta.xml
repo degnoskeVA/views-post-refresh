@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Views_A_Case_Has_Been_Assigned_to_Exec_Writer</fullName>
+        <ccEmails>viewsdevteam@bah.com</ccEmails>
+        <description>A Case Has Been Assigned to Exec Writer</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>va.admin@va.gov</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Views/Views_New_Case_Assigned_to_Exec_Writer</template>
+    </alerts>
+</Workflow>

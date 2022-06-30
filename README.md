@@ -7,12 +7,18 @@ From setup, go to Email Services, select VIEWS Email to Case
 Click new email address to set up these 3 addresses: 
 
 Email Address Name & Email Address: 
-    lean_letter 
-    generic_cong_corr 
-    case_mail 
+&emsp; lean_letter 
+
+&emsp; generic_cong_corr 
+
+&emsp; case_mail 
+
 Active: Checked 
+
 Context User: Salesforce Administrator 
+
 Accept Email From: Blank 
+
 
 An email address will be auto generated for each email address added  
 

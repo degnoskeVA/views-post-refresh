@@ -1,12 +1,20 @@
 # This is a basic workflow to help you get started with Actions
 
-name: viewsdeval Post Refresh
+name: CCM Post Refresh
 
 # Controls when the workflow will run
-on: 
-  # Allows you to run this workflow manually from the Actions tab
+on:
   workflow_dispatch:
-
+    inputs:
+      Sandbox:
+        type: choice
+        description: Sandbox
+        options:
+        - viewsdev
+        - viewsdeval
+        - viewssit
+        - viewsuat
+        - int
 env:
   GITHUB_WORKFLOW_TMP_FOLDER:   ".github-workflow-tmp"
   GITHUB_JSON:                  ${{ toJSON(github) }}

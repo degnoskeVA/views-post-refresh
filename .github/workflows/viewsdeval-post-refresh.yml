@@ -1,0 +1,46 @@
+# This is a basic workflow to help you get started with Actions
+
+name: viewsdeval Post Refresh# Controls when the workflow will run
+on: 
+  schedule:
+  - cron: '0 0 * * *'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  GITHUB_WORKFLOW_TMP_FOLDER:   ".github-workflow-tmp"
+  GITHUB_JSON:                  ${{ toJSON(github) }}
+  SLACK_WEBHOOK_URL:            ${{ secrets.SLACK_WEBHOOK_URL }}
+  DTC_RELEASE_CICD_KEY_BASE64:  ${{ secrets.DTC_RELEASE_CICD_KEY_BASE64 }}
+  SF_DEVHUB_CLIENTID:           ${{ secrets.SF_DEVHUB_CLIENTID }}
+  SF_DEVHUB_KEY_BASE64:         ${{ secrets.SF_DEVHUB_KEY_BASE64 }}
+  SF_DEVHUB_ORG_URL:            ${{ secrets.SF_DEVHUB_ORG_URL }}
+  SF_DEV2_AUTH_URL:              "force://PlatformCLI::5Aep861YbQ2WNspBqEUgFsHVTHaTaclYz2mONygu9Iyc.gICvY91IPR1qFRuHMq2Lie7iUST.FJWDGC.Q8pYbbn@va--squaredev2.my.salesforce.com"
+  DEVHUB_ORG_USERNAME:          ${{ secrets.CICD_DEVHUB_USERNAME }}
+  DEVHUB_ALIAS:                 "devhub"
+  DEV2_ALIAS:                    "dev2"
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  delete-error-logs:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+        
+      - name: INSTALL SFDX 
+        run: npm install sfdx-cli --global
+        
+      - name: AUTHENTICATE DEV ORG
+        shell: pwsh
+        run: ../SQUARES-DevOps/.github/workflows/authenticate-salesforce-authurl.ps1
+
+      # Runs a single command using the runners shell
+      - name: SOQL Query and delete all error log records
+        shell: pwsh
+        run: ../SQUARES-DevOps/.github/workflows/delete-error-logs.ps1

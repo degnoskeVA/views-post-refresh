@@ -7,6 +7,7 @@ From setup, go to Email Services, select VIEWS Email to Case
 Click new email address to set up these 3 addresses: 
 
 Email Address Name & Email Address: 
+
 &emsp; lean_letter 
 
 &emsp; generic_cong_corr 

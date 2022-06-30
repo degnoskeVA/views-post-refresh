@@ -18,7 +18,7 @@ env:
   SF_DEV2_AUTH_URL:              "force://PlatformCLI::5Aep861YbQ2WNspBqEUgFsHVTHaTaclYz2mONygu9Iyc.gICvY91IPR1qFRuHMq2Lie7iUST.FJWDGC.Q8pYbbn@va--squaredev2.my.salesforce.com"
   DEVHUB_ORG_USERNAME:          ${{ secrets.CICD_DEVHUB_USERNAME }}
   DEVHUB_ALIAS:                 "devhub"
-  DEV2_ALIAS:                    "dev2"
+  DEV2_ALIAS:                    "viewsdeval"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -37,9 +37,9 @@ jobs:
         
       - name: AUTHENTICATE DEV ORG
         shell: pwsh
-        run: ../SQUARES-DevOps/.github/workflows/authenticate-salesforce-authurl.ps1
+        run: ../views-post-refresh/.github/workflows/viewsdeval-authenticate-salesforce-authurl.ps1
 
       # Runs a single command using the runners shell
-      - name: SOQL Query and delete all error log records
+      - name: RUN CCM POST-REFRESH STEPS - VIEWSDEVAL
         shell: pwsh
-        run: ../SQUARES-DevOps/.github/workflows/delete-error-logs.ps1
+        run: ../views-post-refresh/CCM/viewsdeval-ccm-post-refresh.ps1

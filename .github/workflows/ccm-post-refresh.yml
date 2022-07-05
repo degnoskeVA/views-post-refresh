@@ -33,12 +33,73 @@ jobs:
       - name: Set Default Org 
         run: sfdx config:set defaultusername=${{ secrets.USERNAME}} --global
 
-      # Runs a single command using the runners shell
-      - name: RUN CCM POST-REFRESH STEPS
+      - name: INSERT DATA
         shell: pwsh
         run: |
-          sfdx force:data:bulk:upsert -s Date__c -f "../views-post-refresh/CCM/data/Dates_Data.csv" -i ID -u $username
-          sfdx force:data:bulk:upsert -s AD_Account__c -f "../views-post-refresh/CCM/data/AD Stations Facility Upsert With Record.csv" -i ID -u $username
+          sfdx force:data:bulk:upsert -s Date__c -f "../views-post-refresh/CCM/data/Dates_Data.csv" -i ID -u ${{ secrets.USERNAME}}
+          sfdx force:data:bulk:upsert -s AD_Account__c -f "../views-post-refresh/CCM/data/AD Stations Facility Upsert With Record.csv" -i ID -u ${{ secrets.USERNAME}}
 
+      - name: SCHEDULE BATCH JOBS
+        shell: pwsh
+        run: sfdx force:apex:execute -f ../views-post-refresh/CCM/apex/schedule-batch-jobs.apex -u ${{ secrets.USERNAME}} 
+        
+      - name: DEPLOY EMAIL ALERT
+        shell: pwsh
+        run: sfdx force:source:deploy -m Workflow:Case -u ${{ secrets.USERNAME}} 
+
+      - name: CREATE CONTACT ROLES
+        shell: pwsh
+        run: sfdx force:apex:execute -f ../views-post-refresh/CCM/apex/create-contacts-roles.apex -u ${{ secrets.USERNAME}} 
+
+      - name: CREATE USERS
+        shell: pwsh
+        run: |
+          Add-Content -Path temp-create-users.apex -Value "String environment = '${{ secrets.ALIAS}} ';" 
+          Add-Content -Path temp-create-users.apex (Get-Content "../views-post-refresh/CCM/apex/create-users.apex")
+          sfdx force:apex:execute -f temp-create-users.apex -u ${{ secrets.USERNAME}}
+
+
+      - name: CREATE ACCOUNTS
+        shell: pwsh
+        run: sfdx force:apex:execute -f ../views-post-refresh/CCM/apex/create-accounts.apex -u ${{ secrets.USERNAME}} 
+
+      - name: CREATE CONTACTS
+        shell: pwsh
+        run: |
+          Add-Content -Path temp-create-contacts.apex -Value "String environment = '${{ secrets.ALIAS}}';" 
+          Add-Content -Path temp-create-contacts.apex (Get-Content "../views-post-refresh/CCM/apex/create-contacts.apex")
+          sfdx force:apex:execute -f temp-create-contacts.apex -u ${{ secrets.USERNAME}} 
+
+      - name: ASSIGN PERMSETS
+        shell: pwsh
+        run: |
+          Add-Content -Path temp-permset-assign.apex -Value "String environment = '${{ secrets.ALIAS}}';" 
+          Add-Content -Path temp-permset-assign.apex (Get-Content "../views-post-refresh/CCM/apex/permset-assign.apex")
+          sfdx force:apex:execute -f temp-permset-assign.apex -u ${{ secrets.USERNAME}}  
+
+      - name: ASSIGN GROUPS
+        shell: pwsh
+        run: |
+          Add-Content -Path temp-group-assign.apex -Value "String environment = '${{ secrets.ALIAS}}';" 
+          Add-Content -Path temp-group-assign.apex (Get-Content "../views-post-refresh/CCM/apex/group-assign.apex")
+          sfdx force:apex:execute -f temp-group-assign.apex -u ${{ secrets.USERNAME}}
+
+      - name: Create Accounts from Primary Office Groups
+        shell: pwsh
+        run: sfdx force:apex:execute -f ../views-post-refresh/CCM/apex/primary-office-accounts.apex -u ${{ secrets.USERNAME}} 
+
+
+      - name: Create Contacts for Accounts of Primary Office Groups
+        shell: pwsh
+        run: |
+          sfdx force:apex:execute -f ../views-post-refresh/CCM/apex/primary-office-contacts-1.apex -u ${{ secrets.USERNAME}}  
+          sfdx force:apex:execute -f ../views-post-refresh/CCM/apex/primary-office-contacts-2.apex -u ${{ secrets.USERNAME}}  
+          sfdx force:apex:execute -f ../views-post-refresh/CCM/apex/primary-office-contacts-3.apex  -u ${{ secrets.USERNAME}}  
+
+
+      - name: Setup Tiger Team FQs
+        shell: pwsh
+        run: sfdx force:apex:execute -f ../views-post-refresh/CCM/apex/setup-tiger-team-fq.apex -u ${{ secrets.USERNAME}}  
+        
         # ../views-post-refresh/CCM/ccm-post-refresh.ps1 -auth_url ${{ secrets.AUTH_URL}} -username ${{ secrets.USERNAME}} -org_alias ${{ secrets.ALIAS}} 
 

@@ -1,4 +1,4 @@
-param($org_alias, $auth_url)
+param($devhub_alias, $auth_url)
 
 Write-Host "AUTHENTICATING SALESFORCE ORG (VIA AUTH URL)" 
 

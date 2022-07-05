@@ -36,4 +36,9 @@ jobs:
       # Runs a single command using the runners shell
       - name: RUN CCM POST-REFRESH STEPS
         shell: pwsh
-        run: ../views-post-refresh/CCM/ccm-post-refresh.ps1 -auth_url ${{ secrets.AUTH_URL}} -username ${{ secrets.USERNAME}} -org_alias ${{ secrets.ALIAS}} 
+        run: |
+          sfdx force:data:bulk:upsert -s Date__c -f "../views-post-refresh/CCM/data/Dates_Data.csv" -i ID -u $username
+          sfdx force:data:bulk:upsert -s AD_Account__c -f "../views-post-refresh/CCM/data/AD Stations Facility Upsert With Record.csv" -i ID -u $username
+
+        # ../views-post-refresh/CCM/ccm-post-refresh.ps1 -auth_url ${{ secrets.AUTH_URL}} -username ${{ secrets.USERNAME}} -org_alias ${{ secrets.ALIAS}} 
+

@@ -4,13 +4,13 @@ sfdx force:data:bulk:upsert -s Date__c -f "../views-post-refresh/CCM/data/Dates_
 sfdx force:data:bulk:upsert -s AD_Account__c -f "../views-post-refresh/CCM/data/AD Stations Facility Upsert With Record.csv" -i ID -u $username
 
 #Schedule Batch Jobs
-sfdx force:apex:execute -f schedule-batch-jobs.apex
+sfdx force:apex:execute -f ../views-post-refresh/CCM/schedule-batch-jobs.apex -u $username 
 
 #Deploy Email Alert
-sfdx force:source:deploy -m Workflow:Case
+sfdx force:source:deploy -m Workflow:Case -u $username 
 
 #Create Contact Roles
-sfdx force:apex:execute -f apex/create-contacts-roles.apex  -u $username 
+sfdx force:apex:execute -f ../views-post-refresh/CCM/apex/create-contacts-roles.apex  -u $username 
 
 #Create Users
 Add-Content -Path temp-create-users.apex -Value "String environment = '$($org_alias)';" 

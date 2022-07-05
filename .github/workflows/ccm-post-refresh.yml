@@ -26,9 +26,15 @@ jobs:
       - name: INSTALL SFDX 
         run: npm install sfdx-cli --global
 
+      - name: Set Default Org 
+        run: npm install sfdx-cli --global
+
       - name: AUTHENTICATE Sandbox
         shell: pwsh
         run: ../views-post-refresh/.github/workflows/authenticate-salesforce-authurl.ps1  -auth_url ${{ secrets.AUTH_URL}}  -devhub_alias ${{ secrets.ALIAS}} 
+
+      - name: Set Default Org 
+        run: sfdx config:set defaultusername=${{ secrets.USERNAME}} --global
 
       # Runs a single command using the runners shell
       - name: RUN CCM POST-REFRESH STEPS

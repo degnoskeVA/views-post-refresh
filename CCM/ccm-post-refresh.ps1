@@ -1,7 +1,7 @@
 param($auth_url, $username, $devhub_alias )
 
-sfdx force:data:bulk:upsert -s Date__c -f "data/Dates_Data.csv" -i ID 
-sfdx force:data:bulk:upsert -s AD_Account__c -f "data/AD Stations Facility Upsert With Record.csv" -i ID
+sfdx force:data:bulk:upsert -s Date__c -f "data/Dates_Data.csv" -i ID -u $username
+sfdx force:data:bulk:upsert -s AD_Account__c -f "data/AD Stations Facility Upsert With Record.csv" -i ID -u $username
 
 #Schedule Batch Jobs
 sfdx force:apex:execute -f schedule-batch-jobs.apex

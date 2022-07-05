@@ -18,7 +18,7 @@ Add-Content -Path temp-create-users.apex (Get-Content "../views-post-refresh/CCM
 sfdx force:apex:execute -f temp-create-users.apex -u $username 
 
 #Create Accounts
-sfdx force:apex:execute -f apex/create-accounts.apex
+sfdx force:apex:execute -f ../views-post-refresh/CCM/apex/create-accounts.apex
 
 #Create Contacts
 Add-Content -Path temp-create-contacts.apex -Value "String environment = '$($org_alias)';" 

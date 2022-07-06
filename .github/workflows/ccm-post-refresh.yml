@@ -36,12 +36,15 @@ jobs:
       - name: INSERT DATA
         shell: pwsh
         run: |
+          $ErrorActionPreference = 'stop'
           sfdx force:data:bulk:upsert -s Date__c -f "../views-post-refresh/CCM/data/Dates_Data.csv" -i ID -u ${{ secrets.USERNAME}}
           sfdx force:data:bulk:upsert -s AD_Account__c -f "../views-post-refresh/CCM/data/AD Stations Facility Upsert With Record.csv" -i ID -u ${{ secrets.USERNAME}}
 
       - name: SCHEDULE BATCH JOBS
         shell: pwsh
-        run: sfdx force:apex:execute -f ../views-post-refresh/CCM/apex/schedule-batch-jobs.apex -u ${{ secrets.USERNAME}} 
+        run: |
+          $ErrorActionPreference = 'stop'
+          sfdx force:apex:execute -f ../views-post-refresh/CCM/apex/schedule-batch-jobs.apex -u ${{ secrets.USERNAME}} 
         
       - name: DEPLOY EMAIL ALERT
         shell: pwsh

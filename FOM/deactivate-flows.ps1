@@ -7,7 +7,7 @@ sfdx force:source:deploy -m ApexTrigger:ViewsSSNUpdateTrigger  -u $username
 
 # Deactivate AccountTrigger
 sfdx force:source:retrieve -m ApexTrigger:AccountTrigger  -u $username -w 5
-(Get-Content -path ../views-post-refresh/force-app/main/default/triggers/AccountTrigger.trigger-meta.xml -Raw) -replace 'active','Inactive'| Set-Content -Path ../views-post-refresh/force-app/main/default/triggers/AccountTrigger.trigger-meta.xml
+(Get-Content -path ../views-post-refresh/force-app/main/default/triggers/AccountTrigger.trigger-meta.xml -Raw) -replace '<status>Active</status>','<status>Inactive</status>'| Set-Content -Path ../views-post-refresh/force-app/main/default/triggers/AccountTrigger.trigger-meta.xml
 sfdx force:source:deploy -m ApexTrigger:AccountTrigger  -u $username
 
 # Deactivate FOM Update External ID workflow Rule
@@ -22,7 +22,7 @@ sfdx force:source:deploy -m "Workflow:Account"  -u $username
 
 # Deactivate CF_Account_Related_Functionality_Edit_Account workflow Rule
 sfdx force:source:retrieve -m "flowDefinition:CF_Account_Related_Functionality_Edit_Account"  -u $username -w 5
-(gc force-app/main/default/flowDefinitions/CF_Account_Related_Functionality_Edit_account.flowDefinition-meta.xml -TotalCount 3)[-1] |  sc cf-account-output.txt 
+(gc force-app/main/default/flowDefinitions/CF_Account_Related_Functionality_Edit_Account.flowDefinition-meta.xml -TotalCount 3)[-1] |  sc cf-account-output.txt 
 (Get-Content -path ../views-post-refresh/force-app/main/default/flowDefinitions/CF_Account_Related_Functionality_Edit_Account.flowDefinition-meta.xml -Raw) -replace '<activeVersionNumber>.+','<activeVersionNumber>0</activeVersionNumber>'| Set-Content -Path ../views-post-refresh/force-app/main/default/flowDefinitions/CF_Account_Related_Functionality_Edit_Account.flowDefinition-meta.xml
 sfdx force:source:deploy -m "flowDefinition:CF_Account_Related_Functionality_Edit_Account"  -u $username
 

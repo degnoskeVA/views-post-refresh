@@ -52,8 +52,8 @@ sfdx force:source:deploy -m "flowDefinition:Create_FOM_Data_Collection_Requests"
 
 # Deactivate FOM_Default_Account_POC_from_POC_If_Null  workflow Rule
 sfdx force:source:retrieve -m "flowDefinition:FOM_Default_Account_POC_from_POC_If_Null"  -u $username -w 5
-(gc force-app/main/default/flowDefinitions/FOM_Default_Account_POC_From_POC_If_Null.flowDefinition-meta.xml -TotalCount 3)[-1] |  Set-Content default-poc.txt 
-(Get-Content -path ../views-post-refresh/force-app/main/default/flowDefinitions/FOM_Default_Account_POC_From_POC_If_Null.flowDefinition-meta.xml -Raw) -replace '<activeVersionNumber>.+','<activeVersionNumber>0</activeVersionNumber>'| Set-Content -Path ../views-post-refresh/force-app/main/default/flowDefinitions/FOM_Default_Account_POC_from_POC_If_Null.flowDefinition-meta.xml
+(gc force-app/main/default/flowDefinitions/FOM_Default_Account_POC_from_POC_If_Null.flowDefinition-meta.xml -TotalCount 3)[-1] |  Set-Content default-poc.txt 
+(Get-Content -path ../views-post-refresh/force-app/main/default/flowDefinitions/FOM_Default_Account_POC_from_POC_If_Null.flowDefinition-meta.xml -Raw) -replace '<activeVersionNumber>.+','<activeVersionNumber>0</activeVersionNumber>'| Set-Content -Path ../views-post-refresh/force-app/main/default/flowDefinitions/FOM_Default_Account_POC_from_POC_If_Null.flowDefinition-meta.xml
 sfdx force:source:deploy -m "flowDefinition:FOM_Default_Account_POC_from_POC_If_Null"  -u $username
 
 # Deactivate ViewsSSNUpdateTrigger

@@ -27,7 +27,7 @@ $path = "../views-post-refresh/force-app/main/default/flowDefinitions/$flow.flow
 (gc -Path $path) | where {$_ -ne ""} | Set-Content -Path $path
 (gc $flow".txt" ) | Add-Content -Path $path
 (gc -Path $path) -replace 'metadata"/', 'metadata"' | Set-Content -Path $path
-"</FlowDefinition>" | ac -Path $path
+"</FlowDefinition>" | Add-Content -Path $path
 sfdx force:source:deploy -m flowDefinition:$flow  -u $username
 }
 

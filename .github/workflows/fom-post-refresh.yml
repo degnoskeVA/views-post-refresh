@@ -94,11 +94,11 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference = 'stop'
-          sfdx force:apex:execute -f ../views-post-refresh/FOM/apex/migrate-1-data.apex -u ${{ secrets.USERNAME}}
-          sfdx force:apex:execute -f ../views-post-refresh/FOM/apex/migrate-2-data.apex -u ${{ secrets.USERNAME}}
-          sfdx force:apex:execute -f ../views-post-refresh/FOM/apex/migrate-3-data.apex -u ${{ secrets.USERNAME}}
-          sfdx force:apex:execute -f ../views-post-refresh/FOM/apex/migrate-4-data.apex -u ${{ secrets.USERNAME}}
-          sfdx force:apex:execute -f ../views-post-refresh/FOM/apex/migrate-5-data.apex -u ${{ secrets.USERNAME}}
+          sfdx force:apex:execute -f ../views-post-refresh/FOM/apex/migrate-data-1.apex -u ${{ secrets.USERNAME}}
+          sfdx force:apex:execute -f ../views-post-refresh/FOM/apex/migrate-data-2.apex -u ${{ secrets.USERNAME}}
+          sfdx force:apex:execute -f ../views-post-refresh/FOM/apex/migrate-data-3.apex -u ${{ secrets.USERNAME}}
+          sfdx force:apex:execute -f ../views-post-refresh/FOM/apex/migrate-data-4.apex -u ${{ secrets.USERNAME}}
+          sfdx force:apex:execute -f ../views-post-refresh/FOM/apex/migrate-data-5.apex -u ${{ secrets.USERNAME}}
 
   reactivate-flows:
     needs: migrate-data

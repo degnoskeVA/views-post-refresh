@@ -29,7 +29,7 @@ $path = "../views-post-refresh/force-app/main/default/flowDefinitions/$flow.flow
 sfdx force:source:deploy -m flowDefinition:$flow -u $username
 }
 
-# Deactivate ViewsSSNUpdateTrigger
+# Deactivate FOM_Activities_Field_Required_On_Level2s
 $path = "../views-post-refresh/force-app/main/default/objects/Account/validationRules/FOM_Activities_Field_Required_On_Level2s.validationRule-meta.xml"
 sfdx force:source:retrieve -m ValidationRule:Account.FOM_Activities_Field_Required_On_Level2s  -u $username -w 5
 (Get-Content -path $path -Raw) -replace '<active>true</active>','<active>false</active>'| Set-Content -Path $path

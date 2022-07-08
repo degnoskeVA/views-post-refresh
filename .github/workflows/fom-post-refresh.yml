@@ -38,3 +38,9 @@ jobs:
         run: |
           $ErrorActionPreference = 'stop'
           ../views-post-refresh/FOM/deactivate-flows.ps1 -username ${{ secrets.USERNAME}}
+
+      - name: REACTIVATE FLOWS
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'stop'
+          ../views-post-refresh/FOM/reactivate-flows.ps1 -username ${{ secrets.USERNAME}}

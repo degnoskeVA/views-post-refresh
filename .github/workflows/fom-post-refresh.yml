@@ -23,8 +23,9 @@ jobs:
       - uses: actions/checkout@v3
         
       - name: INSTALL SFDX 
-        run: npm install sfdx-cli --global
-
+        run: 
+          npm install sfdx-cli --global
+          sfdx update
       - name: AUTHENTICATE Sandbox
         shell: pwsh
         run: ../views-post-refresh/.github/workflows/authenticate-salesforce-authurl.ps1  -auth_url ${{ secrets.AUTH_URL}}  -org_alias ${{ secrets.ALIAS}} 
@@ -36,7 +37,7 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference = 'stop'
-          sfdx force:source:deploy -x ../views-post-refresh/manifest/package.xml -username ${{ secrets.USERNAME}}
+          sfdx force:source:deploy -x "../views-post-refresh/manifest/package.xml" -u ${{ secrets.USERNAME}} 
 
 
   # # This workflow contains a single job called "build"
@@ -67,7 +68,7 @@ jobs:
           ../views-post-refresh/FOM/deactivate-flows.ps1 -username ${{ secrets.USERNAME}}
   
   migrate-data:
-    needs: deactivate-flows
+    needs: [deactivate-flows, deploy-metadata]
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.sandbox }}

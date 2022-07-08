@@ -12,35 +12,36 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # # This workflow contains a single job called "build"
-  # deactivate-flows:
-  #   # The type of runner that the job will run on
-  #   runs-on: ubuntu-latest
-  #   environment: ${{ github.event.inputs.sandbox }}
+  deactivate-flows:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.sandbox }}
 
-  #   steps:
+    steps:
 
-  #     # Checks-out repository under $GITHUB_WORKSPACE
-  #     - uses: actions/checkout@v3
+      # Checks-out repository under $GITHUB_WORKSPACE
+      - uses: actions/checkout@v3
         
-  #     - name: INSTALL SFDX 
-  #       run: npm install sfdx-cli --global
+      - name: INSTALL SFDX 
+        run: npm install sfdx-cli --global
 
-  #     - name: AUTHENTICATE Sandbox
-  #       shell: pwsh
-  #       run: ../views-post-refresh/.github/workflows/authenticate-salesforce-authurl.ps1  -auth_url ${{ secrets.AUTH_URL}}  -org_alias ${{ secrets.ALIAS}} 
+      - name: AUTHENTICATE Sandbox
+        shell: pwsh
+        run: ../views-post-refresh/.github/workflows/authenticate-salesforce-authurl.ps1  -auth_url ${{ secrets.AUTH_URL}}  -org_alias ${{ secrets.ALIAS}} 
 
-  #     - name: Set Default Org 
-  #       run: sfdx config:set defaultusername=${{ secrets.USERNAME}} --global
+      - name: Set Default Org 
+        run: sfdx config:set defaultusername=${{ secrets.USERNAME}} --global
 
-  #     - name: DEACTIVATE FLOWS
-  #       shell: pwsh
-  #       run: |
-  #         $ErrorActionPreference = 'stop'
-  #         ../views-post-refresh/FOM/deactivate-flows.ps1 -username ${{ secrets.USERNAME}}
+      - name: DEACTIVATE FLOWS
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'stop'
+          ../views-post-refresh/FOM/deactivate-flows.ps1 -username ${{ secrets.USERNAME}}
 
 
 
   reactivate-flows:
+    needs: deactivate-flows
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.sandbox }}

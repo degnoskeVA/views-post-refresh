@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>FOM_Activities_Field_Required_On_Level2s</fullName>
-    <active>false</active>
-    <description>Level 2 accounts must have this field populated</description>
-    <errorConditionFormula>AND(
-				ISPICKVAL(FOM_Level__c, &quot;2&quot;),
-				ISPICKVAL(In_FOM__c, &quot;Yes&quot;),
-				(LEN(FOM_Functions_and_Activities__c) = 0)
-				)</errorConditionFormula>
-    <errorDisplayField>FOM_Functions_and_Activities__c</errorDisplayField>
-    <errorMessage>Field Activities must be populated on Level 2 accounts.</errorMessage>
-</ValidationRule>
-
+<ApexTrigger xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>44.0</apiVersion>
+    <status>Inactive</status>
+</ApexTrigger>

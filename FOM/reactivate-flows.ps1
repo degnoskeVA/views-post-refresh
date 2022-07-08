@@ -26,7 +26,7 @@ foreach ($flow in $flowArray)
 $path = "../views-post-refresh/force-app/main/default/flowDefinitions/$flow.flowDefinition-meta.xml"
 sfdx force:source:retrieve -m flowDefinition:$flow  -u $username -w 5
 (gc -Path $path) | where {$_ -ne ""} | Set-Content -Path $path
-(gc $flow".txt" ) | ac -Path $path
+(gc $flow".txt" ) | Add-Content -Path $path
 (gc -Path $path) -replace 'metadata"/', 'metadata"' | sc $path
 "</FlowDefinition>" | ac -Path $path
 sfdx force:source:deploy -m flowDefinition:$flow  -u $username

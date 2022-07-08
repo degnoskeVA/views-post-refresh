@@ -38,8 +38,6 @@ jobs:
           $ErrorActionPreference = 'stop'
           ../views-post-refresh/FOM/deactivate-flows.ps1 -username ${{ secrets.USERNAME}}
 
-
-
   reactivate-flows:
     needs: deactivate-flows
     # The type of runner that the job will run on

@@ -24,10 +24,9 @@ $flowArray = "CF_Account_Related_Functionality_Edit_Account", "CF_Move_Contact_T
 foreach ($flow in $flowArray)
 {
 $path = "../views-post-refresh/force-app/main/default/flowDefinitions/$flow.flowDefinition-meta.xml"
-sfdx force:source:retrieve -m flowDefinition:$flow  -u $username -w 5
 (gc -Path $path) | where {$_ -ne ""} | Set-Content -Path $path
 (gc $flow".txt" ) | Add-Content -Path $path
-(gc -Path $path) -replace 'metadata"/', 'metadata"' | sc $path
+(gc -Path $path) -replace 'metadata"/', 'metadata"' | Set-Content -Path $path
 "</FlowDefinition>" | ac -Path $path
 sfdx force:source:deploy -m flowDefinition:$flow  -u $username
 }

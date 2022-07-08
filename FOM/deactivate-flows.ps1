@@ -25,10 +25,10 @@ $flowArray = "CF_Account_Related_Functionality_Edit_Account", "CF_Move_Contact_T
 foreach ($flow in $flowArray)
 {
 $path = "../views-post-refresh/force-app/main/default/flowDefinitions/$flow.flowDefinition-meta.xml"
-sfdx force:source:retrieve -m flowDefinition:$flow -w 5
+sfdx force:source:retrieve -m flowDefinition:$flow -w 5 -u $username
 (gc $path -TotalCount 3)[-1] |  Set-Content $flow".txt"
 (Get-Content -path $path -Raw) -replace '<activeVersionNumber>.+','<activeVersionNumber>0</activeVersionNumber>'| Set-Content $path
-sfdx force:source:deploy -m flowDefinition:$flow 
+sfdx force:source:deploy -m flowDefinition:$flow -u $username
 }
 
 # Deactivate ViewsSSNUpdateTrigger

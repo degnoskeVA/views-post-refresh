@@ -2,7 +2,7 @@ public class FOM_DataSetupHandler {
     
 	private static ID fomAccountRecType = Schema.SObjectType.Account.getRecordTypeInfosByName().get('VA Organization').getRecordTypeId();
     
-    @future
+     
     public static void buildData() {
         loadAccounts();
     //    loadContacts();
@@ -91,7 +91,7 @@ public class FOM_DataSetupHandler {
         
     }
     
-    @future
+     
     public static void loadContacts() {
      
         List<Account> accountsAdded = [Select Id From Account 
@@ -144,7 +144,7 @@ public class FOM_DataSetupHandler {
         
     }
     
-    @future
+     
     public static void loadAuthorities() {
         StaticResource sr = [SELECT ID, body FROM StaticResource WHERE Name = 'FOM_DataSetup_Auth' LIMIT 1];
  //       String fomAuthorityData =  EncodingUtil.base64Encode(sr.body);
@@ -180,7 +180,7 @@ public class FOM_DataSetupHandler {
     
     // Destroys all FOM Data (Includes: FOM Accounts, FOM Contacts, FDRs,
     // Authorities, Related Authorities, Related FDR Authorities)
-    @future
+     
     public static void destroyData() {
     	List<Account> accountsToDelete = [Select Id From Account 
                                           Where In_FOM__c = 'Yes' 

@@ -88,7 +88,7 @@ public class FOM_DataSetup_UserCreation {
         }    
     }
     
-    @future
+     
     public static void createPermissionSetAssignments(Map<String, String> firstNameAndLastNameMap) {
         
         Id Lightning_Experience_User = [SELECT Id, Name FROM PermissionSet WHERE Name = 'Lightning_Experience_User'].Id;          
@@ -134,7 +134,7 @@ public class FOM_DataSetup_UserCreation {
         insert permissionSetAssignmentList;  
     }
     
-    @future
+     
     public static void createGroupMembers(Map<String, String> firstNameAndLastNameMap) {
         List<groupmember> groupmemberList = new List<groupmember>();
         

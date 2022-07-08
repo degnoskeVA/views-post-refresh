@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
-
     <types>
         <members>FOM_DataSetup</members>
         <members>FOM_DataSetupHandler</members>
@@ -10,14 +9,10 @@
         <name>ApexClass</name>
     </types>
     <types>
-        <members>FOM_Data_Setup</members>
-        <name>CustomPermission</name>
-    </types>
-    <types>
         <members>FOM_DataSetup_Account</members>
         <members>FOM_DataSetup_Auth</members>
         <members>FOM_DataSetup_Contact</members>
         <name>StaticResource</name>
     </types>
-<version>54.0</version>
+    <version>54.0</version>
 </Package>

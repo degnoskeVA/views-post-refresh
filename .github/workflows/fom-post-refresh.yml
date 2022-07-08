@@ -11,6 +11,35 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+
+    deploy-metadata:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.sandbox }}
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+
+      # Checks-out repository under $GITHUB_WORKSPACE
+      - uses: actions/checkout@v3
+        
+      - name: INSTALL SFDX 
+        run: npm install sfdx-cli --global
+
+      - name: AUTHENTICATE Sandbox
+        shell: pwsh
+        run: ../views-post-refresh/.github/workflows/authenticate-salesforce-authurl.ps1  -auth_url ${{ secrets.AUTH_URL}}  -org_alias ${{ secrets.ALIAS}} 
+
+      - name: Set Default Org 
+        run: sfdx config:set defaultusername=${{ secrets.USERNAME}} --global
+
+      - name: DEPLOY METADATA
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'stop'
+          sfdx force:source:deploy -x ../views-post-refresh/manifest/package.xml -username ${{ secrets.USERNAME}}
+
+
   # # This workflow contains a single job called "build"
   deactivate-flows:
     # The type of runner that the job will run on
@@ -37,6 +66,33 @@ jobs:
         run: |
           $ErrorActionPreference = 'stop'
           ../views-post-refresh/FOM/deactivate-flows.ps1 -username ${{ secrets.USERNAME}}
+  
+   migrate-data:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.sandbox }}
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+
+      # Checks-out repository under $GITHUB_WORKSPACE
+      - uses: actions/checkout@v3
+        
+      - name: INSTALL SFDX 
+        run: npm install sfdx-cli --global
+
+      - name: AUTHENTICATE Sandbox
+        shell: pwsh
+        run: ../views-post-refresh/.github/workflows/authenticate-salesforce-authurl.ps1  -auth_url ${{ secrets.AUTH_URL}}  -org_alias ${{ secrets.ALIAS}} 
+
+      - name: Set Default Org 
+        run: sfdx config:set defaultusername=${{ secrets.USERNAME}} --global
+
+      - name: DEPLOY METADATA
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'stop'
+          sfdx force:apex:execute -f ../views-post-refresh/FOM/apex/migrate-data.apex -username ${{ secrets.USERNAME}}
 
   reactivate-flows:
     needs: deactivate-flows
@@ -65,3 +121,4 @@ jobs:
         run: |
           $ErrorActionPreference = 'stop'
           ../views-post-refresh/FOM/reactivate-flows.ps1 -username ${{ secrets.USERNAME}}
+

@@ -67,6 +67,7 @@ jobs:
           ../views-post-refresh/FOM/deactivate-flows.ps1 -username ${{ secrets.USERNAME}}
   
   migrate-data:
+    needs: deactivate-flows
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.sandbox }}
@@ -94,7 +95,7 @@ jobs:
           sfdx force:apex:execute -f ../views-post-refresh/FOM/apex/migrate-data.apex -username ${{ secrets.USERNAME}}
 
   reactivate-flows:
-    needs: deactivate-flows
+    needs: migrate-data
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.sandbox }}

@@ -69,7 +69,8 @@ jobs:
           ../views-post-refresh/FOM/deactivate-flows.ps1 -username ${{ secrets.USERNAME}}
   
   migrate-data:
-    needs: [deactivate-flows, deploy-metadata]
+    # needs: [deactivate-flows, deploy-metadata]
+    needs: deactivate-flows
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.sandbox }}
@@ -90,7 +91,7 @@ jobs:
       - name: Set Default Org 
         run: sfdx config:set defaultusername=${{ secrets.USERNAME}} --global
 
-      - name: DEPLOY METADATA
+      - name: MIGRATE DATAS
         shell: pwsh
         run: |
           $ErrorActionPreference = 'stop'
@@ -106,7 +107,7 @@ jobs:
           Start-Sleep -Seconds 600
 
   reactivate-flows:
-    needs: migrate-data
+    # needs: migrate-data
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.sandbox }}

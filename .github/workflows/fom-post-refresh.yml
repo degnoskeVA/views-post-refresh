@@ -96,15 +96,15 @@ jobs:
         run: |
           $ErrorActionPreference = 'stop'
           sfdx force:apex:execute -f ../views-post-refresh/FOM/apex/migrate-data-1.apex -u ${{ secrets.USERNAME}}
-          Start-Sleep -Seconds 600
+          Start-Sleep -Seconds 300
           sfdx force:apex:execute -f ../views-post-refresh/FOM/apex/migrate-data-2.apex -u ${{ secrets.USERNAME}}
-          Start-Sleep -Seconds 600
+          Start-Sleep -Seconds 300
           sfdx force:apex:execute -f ../views-post-refresh/FOM/apex/migrate-data-3.apex -u ${{ secrets.USERNAME}}
-          Start-Sleep -Seconds 600
+          Start-Sleep -Seconds 300
           sfdx force:apex:execute -f ../views-post-refresh/FOM/apex/migrate-data-4.apex -u ${{ secrets.USERNAME}}
-          Start-Sleep -Seconds 600
+          Start-Sleep -Seconds 300
           sfdx force:apex:execute -f ../views-post-refresh/FOM/apex/migrate-data-5.apex -u ${{ secrets.USERNAME}}
-          Start-Sleep -Seconds 600
+          Start-Sleep -Seconds 300
 
   reactivate-flows:
     needs: migrate-data

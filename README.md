@@ -1,6 +1,7 @@
 ##### Table of Contents  
 [After Every Refresh](#after_every_refresh)  
 [CCM Manual Steps](#ccm) 
+
 [FOM Manual Steps](#fom) 
 
 # Manual Steps
@@ -39,7 +40,9 @@ A full command example :     sfdx auth:web:login --instanceurl "https://va-funq.
 8.) Open up the AUTH_URL Secret and paste the Auth URL surrounded in double quotes
 
 <a name="ccm"/>
+
 ## CCM Manual Post-Refresh Steps
+
 ### Email to Case setup (Step can be run independently of the automation) 
 
 From setup, go to Email Services, select VIEWS Email to Case 

@@ -104,7 +104,6 @@ jobs:
           sfdx force:apex:execute -f ../views-post-refresh/FOM/apex/migrate-data-4.apex -u ${{ secrets.USERNAME}}
           Start-Sleep -Seconds 300
           sfdx force:apex:execute -f ../views-post-refresh/FOM/apex/migrate-data-5.apex -u ${{ secrets.USERNAME}}
-          Start-Sleep -Seconds 300
 
   reactivate-flows:
     needs: migrate-data

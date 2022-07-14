@@ -58,7 +58,7 @@ jobs:
           sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "REST_API_Download_Endpoint__c='https://apidownloaduatna11.springcm.com'" -u ${{ secrets.USERNAME}}
           sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "REST_API_Upload_Endpoint__c='https://apiuploaduatna11.springcm.com'" -u ${{ secrets.USERNAME}}
           sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "REST_API_Object_Endpoint__c='https://apiuatna11.springcm.com'" -u ${{ secrets.USERNAME}}
-          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "Salesforce_Partner_WSDL_SOAP_endpoint__c='https://va--${{ secrets.ALIAS}}.my.salesforce.com/services/Soap/u/44.0/$test'" -u ${{ secrets.USERNAME}}
+          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "Salesforce_Partner_WSDL_SOAP_endpoint__c='https://va--${{ secrets.ALIAS}}.my.salesforce.com/services/Soap/u/44.0/$orgId'" -u ${{ secrets.USERNAME}}
           sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "Name='SpringCM ${{ secrets.ALIAS}} Settings'" -u ${{ secrets.USERNAME}}
 
       - name: User Setup

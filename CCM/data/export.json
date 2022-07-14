@@ -1,0 +1,14 @@
+{
+    "objects": [
+        {
+            "query": "SELECT ID, ISDELETED, NAME,DATE__C , DAY_OF_WEEK_NUM__C , HOLIDAY_REPLACEMENT__C , HOLIDAY__C , PAY_PERIOD__C , WEEK_OF_PAY_PERIOD__C , WEEKDAY__C , WORKDAY__C FROM Date__c",
+            "operation": "Insert"
+            
+        },
+        {
+            "query": "SELECT ID, NAME,BILLING_STATE__C,STA3N__C,RecordTypeId FROM AD_Account__c",
+            "operation": "Insert"
+            
+        }
+    ]
+}

@@ -26,6 +26,9 @@ jobs:
       - name: INSTALL SFDX 
         run: npm install sfdx-cli --global
 
+      - name: INSTALL SFDMU 
+        run: sfdx plugins:install sfdmu
+
       - name: AUTHENTICATE Sandbox
         shell: pwsh
         run: ../views-post-refresh/.github/workflows/authenticate-salesforce-authurl.ps1  -auth_url ${{ secrets.AUTH_URL}}  -org_alias ${{ secrets.ALIAS}} 
@@ -37,8 +40,11 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference = 'stop'
-          sfdx force:data:bulk:upsert -s Date__c -f "../views-post-refresh/CCM/data/Dates_Data.csv" -i ID -u ${{ secrets.USERNAME}}
-          sfdx force:data:bulk:upsert -s AD_Account__c -f "../views-post-refresh/CCM/data/AD Stations Facility Upsert With Record.csv" -i ID -u ${{ secrets.USERNAME}}
+          cd ../views-post-refresh/CCM/data
+          sfdx sfdmu:run --sourceusername csvfile --targetusername ${{ secrets.USERNAME}}
+          cd ..
+          cd ..
+          cd ..
 
       - name: SCHEDULE BATCH JOBS
         shell: pwsh

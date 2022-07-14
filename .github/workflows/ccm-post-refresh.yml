@@ -41,7 +41,7 @@ jobs:
         run: |
           $ErrorActionPreference = 'stop'
           cd ../views-post-refresh/CCM/data
-          sfdx sfdmu:run --sourceusername csvfile --targetusername $username
+          sfdx sfdmu:run --sourceusername csvfile --targetusername ${{ secrets.USERNAME}}
           cd ..
           cd ..
           cd ..

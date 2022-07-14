@@ -38,11 +38,11 @@ jobs:
       - name: UPDATE SPRINGCM Folder Path Custom Setting
         shell: pwsh
         run: |
-          sfdx force:data:record:update -s SpringCM_Folder_Paths__c -w "Application_Name__c='Views_GAO_Case_Attachments'" -v "VIEWS_GAO_CASE_TASK_ATTACHMENTS_URL__C='${{ secrets.GAO_CASE_ATTACHMENTS_URL}}'" 
-          sfdx force:data:record:update -s SpringCM_Folder_Paths__c -w "Application_Name__c='Views_GAO_Case_Attachments'" -v "Folder_Path__c='Other Sources/Salesforce/Veteran Affairs/Cases'"
+          sfdx force:data:record:update -s SpringCM_Folder_Paths__c -w "Application_Name__c='Views_GAO_Case_Attachments'" -v "VIEWS_GAO_CASE_TASK_ATTACHMENTS_URL__C='${{ secrets.GAO_CASE_ATTACHMENTS_URL}}'"  -u ${{ secrets.USERNAME}}
+          sfdx force:data:record:update -s SpringCM_Folder_Paths__c -w "Application_Name__c='Views_GAO_Case_Attachments'" -v "Folder_Path__c='Other Sources/Salesforce/Veteran Affairs/Cases'" -u ${{ secrets.USERNAME}}
           
-          sfdx force:data:record:update -s SpringCM_Folder_Paths__c -w "Application_Name__c='Views_GAO_Case_Task_Attachments'" -v "VIEWS_GAO_CASE_TASK_ATTACHMENTS_URL__C='${{ secrets.GAO_CASE_TASK_ATTACHMENTS_URL}}'" 
-          sfdx force:data:record:update -s SpringCM_Folder_Paths__c -w "Application_Name__c='Views_GAO_Case_Task_Attachments'" -v "Folder_Path__c='Other Sources/Salesforce/Veteran Affairs/Views Case Tasks'"
+          sfdx force:data:record:update -s SpringCM_Folder_Paths__c -w "Application_Name__c='Views_GAO_Case_Task_Attachments'" -v "VIEWS_GAO_CASE_TASK_ATTACHMENTS_URL__C='${{ secrets.GAO_CASE_TASK_ATTACHMENTS_URL}}'" -u ${{ secrets.USERNAME}}
+          sfdx force:data:record:update -s SpringCM_Folder_Paths__c -w "Application_Name__c='Views_GAO_Case_Task_Attachments'" -v "Folder_Path__c='Other Sources/Salesforce/Veteran Affairs/Views Case Tasks'" -u ${{ secrets.USERNAME}}
 
       - name: UPDATE SPRINGCM Integration Settings CUSTOM SETTING
         shell: pwsh
@@ -52,16 +52,15 @@ jobs:
           $orgId = $orgId -replace 'Id', ""
           $orgId = $orgId -replace ' ', "" 
     
-          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "Client_ID__c='${{ secrets.SPRINGCM_CLIENT_ID}}'" 
-          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "Secret_ID__c='${{ secrets.SPRINGCM_SECRET_ID}}'" 
-          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "Authentication_Service__c='https://authuat.springcm.com'"
-          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "REST_API_Download_Endpoint__c='https://apidownloaduatna11.springcm.com'"
-          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "REST_API_Upload_Endpoint__c='https://apiuploaduatna11.springcm.com'"
-          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "REST_API_Object_Endpoint__c='https://apiuatna11.springcm.com'"
-          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "Salesforce_Partner_WSDL_SOAP_endpoint__c='https://va--${{ secrets.ALIAS}}.my.salesforce.com/services/Soap/u/44.0/$test'"
-          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "Name='SpringCM ${{ secrets.ALIAS}} Settings'"
+          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "Client_ID__c='${{ secrets.SPRINGCM_CLIENT_ID}}'"  -u ${{ secrets.USERNAME}}
+          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "Secret_ID__c='${{ secrets.SPRINGCM_SECRET_ID}}'"  -u ${{ secrets.USERNAME}}
+          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "Authentication_Service__c='https://authuat.springcm.com'" -u ${{ secrets.USERNAME}}
+          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "REST_API_Download_Endpoint__c='https://apidownloaduatna11.springcm.com'" -u ${{ secrets.USERNAME}}
+          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "REST_API_Upload_Endpoint__c='https://apiuploaduatna11.springcm.com'" -u ${{ secrets.USERNAME}}
+          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "REST_API_Object_Endpoint__c='https://apiuatna11.springcm.com'" -u ${{ secrets.USERNAME}}
+          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "Salesforce_Partner_WSDL_SOAP_endpoint__c='https://va--${{ secrets.ALIAS}}.my.salesforce.com/services/Soap/u/44.0/$test'" -u ${{ secrets.USERNAME}}
+          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "Name='SpringCM ${{ secrets.ALIAS}} Settings'" -u ${{ secrets.USERNAME}}
 
-        # ../views-post-refresh/CCM/ccm-post-refresh.ps1 -auth_url ${{ secrets.AUTH_URL}} -username ${{ secrets.USERNAME}} -org_alias ${{ secrets.ALIAS}} 
       - name: User Setup
         shell: pwsh
         run: |

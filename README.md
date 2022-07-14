@@ -11,6 +11,7 @@
 
 <a name="after_every_refresh"/>
 ## After Every Sandbox Refresh
+
 ### Update Environment AUTH URL
 
 Authenticating our sfdx cli to a sandbox

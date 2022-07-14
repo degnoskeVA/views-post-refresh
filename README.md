@@ -110,7 +110,8 @@ Put them in the DocGen Files folder
 
 Click Migrate button 
 
-<a name="fom"/>
+<a name="gao"/>
+
 ## GAO Manual Steps
 
 ### Pre-Deployment
@@ -134,7 +135,7 @@ Click Migrate button
 2) Run the following in anonymous apex
 
 
-console.log(String accountPrefix = 'GAO ';
+String accountPrefix = 'GAO ';
 Set<String> accountNames = new Set<String>{
         accountPrefix + 'VHA-10EG GAO/OIG Accountability Liaison Office',
         accountPrefix + 'VBA-20A13 PI&ICS',

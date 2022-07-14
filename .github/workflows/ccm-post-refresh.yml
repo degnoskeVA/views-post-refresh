@@ -40,8 +40,11 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference = 'stop'
-          sfdx force:data:bulk:upsert -s Date__c -f "../views-post-refresh/CCM/data/Dates_Data.csv" -i ID -u ${{ secrets.USERNAME}}
-          sfdx force:data:bulk:upsert -s AD_Account__c -f "../views-post-refresh/CCM/data/AD Stations Facility Upsert With Record.csv" -i ID -u ${{ secrets.USERNAME}}
+          cd ../views-post-refresh/CCM/data
+          sfdx sfdmu:run --sourceusername csvfile --targetusername $username
+          cd ..
+          cd ..
+          cd ..
 
       - name: SCHEDULE BATCH JOBS
         shell: pwsh

@@ -47,7 +47,7 @@ jobs:
       - name: UPDATE SPRINGCM Integration Settings CUSTOM SETTING
         shell: pwsh
         run: |
-          $orgId = sfdx force:org:display | Select-String -Pattern 'Id' 
+          $orgId = sfdx force:org:display -u -u ${{ secrets.USERNAME}} | Select-String -Pattern 'Id' 
           $orgId = $orgId | Select-String -Pattern 'Client Id' -NotMatch 
           $orgId = $orgId -replace 'Id', ""
           $orgId = $orgId -replace ' ', "" 

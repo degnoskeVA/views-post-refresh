@@ -10,6 +10,7 @@
 # Manual Steps
 
 <a name="after_every_refresh"/>
+
 ## After Every Sandbox Refresh
 
 ### Update Environment AUTH URL

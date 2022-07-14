@@ -26,6 +26,9 @@ jobs:
       - name: INSTALL SFDX 
         run: npm install sfdx-cli --global
 
+      - name: INSTALL SFDMU 
+        run: sfdx plugins:install sfdmu
+
       - name: AUTHENTICATE Sandbox
         shell: pwsh
         run: ../views-post-refresh/.github/workflows/authenticate-salesforce-authurl.ps1  -auth_url ${{ secrets.AUTH_URL}}  -org_alias ${{ secrets.ALIAS}} 

@@ -1,7 +1,8 @@
 param($auth_url, $username, $org_alias )
-
-sfdx force:data:bulk:upsert -s Date__c -f "../views-post-refresh/CCM/data/Dates_Data.csv" -i ID -u $username
-sfdx force:data:bulk:upsert -s AD_Account__c -f "../views-post-refresh/CCM/data/AD Stations Facility Upsert With Record.csv" -i ID -u $username
+cd ../views-post-refresh/CCM/data
+sfdx sfdmu:run --sourceusername csvfile --targetusername $username
+cd ..
+cd ..
 
 #Schedule Batch Jobs
 sfdx force:apex:execute -f ../views-post-refresh/CCM/apex/schedule-batch-jobs.apex -u $username 

@@ -91,7 +91,7 @@ jobs:
           Add-Content -Path temp-create-fun-queues.apex (Get-Content "../views-post-refresh/GAO/apex/GAO_INT_SetupScript4_TestFunctionQueuesAndMembers.apex")
           sfdx force:apex:execute -f temp-create-fun-queues.apex -u ${{ secrets.USERNAME}}
 
-      - name: Setup Non-VA Accounts and Contacts
+      - name: Test KW Current Relationhips
         shell: pwsh
         run: |
           $ErrorActionPreference = 'stop'
@@ -113,7 +113,7 @@ jobs:
           Add-Content -Path temp-groups.apex (Get-Content "../views-post-refresh/GAO/apex/GAO_INT_SetupScript7_TestUserGroupMembers.apex")
           sfdx force:apex:execute -f temp-groups.apex -u ${{ secrets.USERNAME}}
 
-      - name: Setup Non-VA Accounts and Contacts
+      - name: Schedule Batch Jobs
         shell: pwsh
         run: |
           $ErrorActionPreference = 'stop'

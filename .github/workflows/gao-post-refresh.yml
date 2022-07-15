@@ -52,14 +52,7 @@ jobs:
           $orgId = $orgId -replace 'Id', ""
           $orgId = $orgId -replace ' ', "" 
     
-          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "Client_ID__c='${{ secrets.SPRINGCM_CLIENT_ID}}'"  -u ${{ secrets.USERNAME}}
-          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "Secret_ID__c='${{ secrets.SPRINGCM_SECRET_ID}}'"  -u ${{ secrets.USERNAME}}
-          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "Authentication_Service__c='https://authuat.springcm.com'" -u ${{ secrets.USERNAME}}
-          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "REST_API_Download_Endpoint__c='https://apidownloaduatna11.springcm.com'" -u ${{ secrets.USERNAME}}
-          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "REST_API_Upload_Endpoint__c='https://apiuploaduatna11.springcm.com'" -u ${{ secrets.USERNAME}}
-          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "REST_API_Object_Endpoint__c='https://apiuatna11.springcm.com'" -u ${{ secrets.USERNAME}}
-          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "Salesforce_Partner_WSDL_SOAP_endpoint__c='https://va--${{ secrets.ALIAS}}.my.salesforce.com/services/Soap/u/44.0/$orgId'" -u ${{ secrets.USERNAME}}
-          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "Name='SpringCM ${{ secrets.ALIAS}} Settings'" -u ${{ secrets.USERNAME}}
+          sfdx force:data:record:update -s SpringCM_Integration_Settings__c -w "Name='SpringCM Prod Settings'" -v "Client_ID__c='${{ secrets.SPRINGCM_CLIENT_ID}}'" , -v "Secret_ID__c='${{ secrets.SPRINGCM_SECRET_ID}}'" , -v "Authentication_Service__c='https://authuat.springcm.com'", -v "REST_API_Download_Endpoint__c='https://apidownloaduatna11.springcm.com'", -v "REST_API_Upload_Endpoint__c='https://apiuploaduatna11.springcm.com'", -v "REST_API_Object_Endpoint__c='https://apiuatna11.springcm.com'", -v "Salesforce_Partner_WSDL_SOAP_endpoint__c='https://va--${{ secrets.ALIAS}}.my.salesforce.com/services/Soap/u/44.0/$orgId'", -v "Name='SpringCM ${{ secrets.ALIAS}} Settings'" -u ${{ secrets.USERNAME}}
 
       - name: User Setup
         shell: pwsh

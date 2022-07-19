@@ -1,0 +1,29 @@
+{
+    "objects": [
+        
+        {
+            "query": "SELECT ID, Name, NAME,Product_Owner__c , Live_Status__c, DTC_Application_Level__c FROM  DTC_Application__c where Name='SQUARES'",
+            "operation": "Insert"
+            
+        },
+            {
+            "query": "SELECT ID, DTC_Application__c, NAME FROM  CF_Application_Level__c",
+            "operation": "Insert"
+            
+            },
+            {
+            "query": "SELECT Name, Permission_Set_Id__c, DTC_Application__c FROM  CF_Permission_Mapping__c",
+            "operation": "Insert"
+            },
+            {
+                "query": "SELECT Name, Squares_Bulk_Search_Template_URL__c, Views_Squares_Bulk_Search_Endpoint__c, Views_Squares_Veteran_Search_Endpoint__c, Views_Squares_Homeless_Episodes_Endpoint__c, Squares_Veteran_Search_Adv_Endpoint__c FROM  Views_squares_Custom_Settings__c",
+                "operation": "Upsert",
+                "externalId": "Name"
+            },
+            {
+                "query": "SELECT Name, RecordTypeId, OwnerId, Type FROM  Account Where Name Like 'SQUARE%'",
+                "operation": "Insert"
+            }
+    ]
+}
+

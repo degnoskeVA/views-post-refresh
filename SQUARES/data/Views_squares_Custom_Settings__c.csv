@@ -1,0 +1,2 @@
+Id,Name,Squares_Bulk_Search_Template_URL__c,Views_Squares_Bulk_Search_Endpoint__c,Views_Squares_Veteran_Search_Endpoint__c,Views_Squares_Homeless_Episodes_Endpoint__c,Squares_Veteran_Search_Adv_Endpoint__c
+a8Bt0000000KyjGEAS,Squares Custom Settings (User),https://va.my.salesforce.com/sfc/p/t00000004X38/a/t00000005ugc/U.zX7UAzqqzFLx2svkDGwihJ6ZlUy7ea17wJY9pCvKo,https://qa-awsgc.dip.va.gov/api/squares/bulkVetSearch/,https://qa-awsgc.dip.va.gov/api/squares/vetSearch/attended,https://qa-awsgc.dip.va.gov/api/squares/episodes/,https://qa-awsgc.dip.va.gov/api/squares/v1/slvssSearch

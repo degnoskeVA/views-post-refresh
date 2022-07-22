@@ -22,7 +22,7 @@ sfdx force:source:deploy -m "Workflow:Account"  -u $username
 
 # Deactivate CF_Account_Related_Functionality_Edit_Account workflow Rule
 
-$flowArray = "CF_Account_Related_Functionality_Edit_Account", "CF_Move_Contact_To_New_Office_Process", "CF_Mark_User_As_Inactive", "CF_User_When_the_Contact_is_Created_Process", "Create_FOM_Data_Collection_Requests", "FOM_Default_Account_POC_from_POC_If_Null"
+$flowArray = "CF_Account_Related_Functionality_Edit_Account", "CF_Move_Contact_To_New_Office_Process", "CF_Mark_User_As_Inactive", "CF_User_When_the_Contact_is_Created_Process", "Create_FOM_Data_Collection_Requests", "FOM_Default_Account_POC_from_Parent"
 foreach ($flow in $flowArray)
 {
 $path = "../views-post-refresh/force-app/main/default/flowDefinitions/$flow.flowDefinition-meta.xml"
